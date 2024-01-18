@@ -23,10 +23,9 @@ return {
 			local lspconfig = require('lspconfig')
 
 			local servers = {
-				'svelte',
 				'rust_analyzer',
-				'emmet_ls',
 				'lua_ls',
+				'biome'
 			}
 
 			for _, lsp in ipairs(servers) do

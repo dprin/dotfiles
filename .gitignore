@@ -5,5 +5,5 @@
 !.gitignore
 !*/
 !hypr
-!waybar
+!waybar/**
 !nvim/**
