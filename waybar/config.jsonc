@@ -98,7 +98,7 @@
 
 	"group/sys": {
 		"orientation": "horizontal",
-		"modules": ["cpu", "network", "temperature", "backlight", "memory"],
+		"modules": ["memory", "network", "temperature", "backlight", "cpu"],
 		"drawer": {
 			"transition-duration": 500,
 			"transition-left-to-right": true
