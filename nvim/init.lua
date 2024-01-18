@@ -34,5 +34,6 @@ vim.opt.linebreak = true
 
 -- Lazy package manager
 require("lazy").setup({
-	{ import = "plugins" }
+	{ import = "plugins" },
+	{ import = "plugins.editor" }
 })
