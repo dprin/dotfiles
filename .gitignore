@@ -3,6 +3,7 @@
 
 # BUTTTTT
 !.gitignore
+!*/
 !hypr
 !waybar
 !nvim/**
