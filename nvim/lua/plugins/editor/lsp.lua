@@ -25,7 +25,8 @@ return {
 			local servers = {
 				'rust_analyzer',
 				'lua_ls',
-				'biome'
+				'biome',
+				'cssls',
 			}
 
 			for _, lsp in ipairs(servers) do

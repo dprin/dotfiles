@@ -1,0 +1,54 @@
+@define-color bg-color #171717;
+@define-color fg-color #ffffff;
+
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+	background-color: @bg-color;
+	color: @fg-color;
+	border-bottom: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* -------- WORKSPACES -------- */
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button.empty {
+	color: #404040;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active {
+    background-color: #64727D;
+	border-radius: 0px;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+/* -------- REST -------- */
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray {
+	padding: 0 10px;
+	color: @fg-color;
+}
