@@ -39,7 +39,6 @@ window#waybar {
 
 /* -------- REST -------- */
 
-#clock,
 #battery,
 #cpu,
 #memory,
@@ -50,6 +49,12 @@ window#waybar {
 #pulseaudio,
 #tray {
 	padding: 0 10px;
+	color: @fg-color;
+}
+
+#clock {
+	padding: 0 10px;
+	padding-top: 3px;
 	color: @fg-color;
 }
 
@@ -77,4 +82,6 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+	padding-left: 10px;
+	padding-right: 13px;
 }
