@@ -1,5 +1,5 @@
 @define-color bg-color #171717;
-@define-color fg-color #ffffff;
+@define-color fg-color #ba1660;
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -16,12 +16,13 @@ window#waybar {
 /* -------- WORKSPACES -------- */
 #workspaces button {
     padding: 0 5px;
+	padding-top: 3px;
     background-color: transparent;
-    color: #ffffff;
+    color: @fg-color;
 }
 
 #workspaces button.empty {
-	color: #404040;
+	color: #595959;
 }
 
 #workspaces button:hover {
@@ -29,16 +30,16 @@ window#waybar {
 }
 
 #workspaces button.active {
-    background-color: #64727D;
+    background-color: rgba(255, 255, 255, 0.1);
 	border-radius: 0px;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @fg-color;
 }
 
 /* -------- REST -------- */
-
+#clock,
 #battery,
 #cpu,
 #memory,
@@ -48,11 +49,6 @@ window#waybar {
 #network,
 #pulseaudio,
 #tray {
-	padding: 0 10px;
-	color: @fg-color;
-}
-
-#clock {
 	padding: 0 10px;
 	padding-top: 3px;
 	color: @fg-color;
@@ -65,6 +61,7 @@ window#waybar {
 
 #battery.charging, #battery.plugged {
     background-color: #26A65B;
+	color: #ffffff;
 }
 
 @keyframes blink {
