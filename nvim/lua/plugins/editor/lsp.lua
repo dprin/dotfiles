@@ -1,5 +1,11 @@
 return {
 	{
+		'github/copilot.vim'
+	},
+	{
+		'jbyuki/nabla.nvim',
+	},
+	{
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
@@ -27,6 +33,8 @@ return {
 				'lua_ls',
 				'biome',
 				'cssls',
+				'clangd',
+				'zls',
 			}
 
 			for _, lsp in ipairs(servers) do
