@@ -9,3 +9,5 @@
 !nvim/**
 !dunst/**
 !tofi/**
+!alacritty.toml
+!alacritty/**
