@@ -1,5 +1,6 @@
 return {
 	"tpope/vim-obsession",
+	"elkowar/yuck.vim",
 	{
 		'goolord/alpha-nvim',
 		event = "VimEnter",

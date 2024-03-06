@@ -35,6 +35,8 @@ return {
 				'cssls',
 				'clangd',
 				'zls',
+				'svelte',
+				'tsserver',
 			}
 
 			for _, lsp in ipairs(servers) do
