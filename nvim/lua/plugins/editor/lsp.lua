@@ -21,30 +21,29 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
 			"L3MON4D3/LuaSnip",
+
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 		},
 
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 			local lspconfig = require('lspconfig')
 
-			local servers = {
-				'rust_analyzer',
-				'lua_ls',
-				'biome',
-				'cssls',
-				'clangd',
-				'zls',
-				'svelte',
-				'tsserver',
-			}
-
-			for _, lsp in ipairs(servers) do
-				lspconfig[lsp].setup {
-					-- on_attach = my_custom_on_attach,
-					capabilities = capabilities,
+			require("mason").setup()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"lua_ls",
+					"rust_analyzer",
+				},
+				handlers = {
+					function(server_name)
+						lspconfig[server_name].setup {
+							capabilities = capabilities,
+						}
+					end,
 				}
-			end
+			})
 
 			-- luasnip setup
 			local luasnip = require('luasnip')
@@ -61,8 +60,6 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
 					['<C-d>'] = cmp.mapping.scroll_docs(4), -- Down
-
-					['<C-Space>'] = cmp.mapping.complete(),
 					['<CR>'] = cmp.mapping.confirm {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
