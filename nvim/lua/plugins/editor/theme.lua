@@ -1,3 +1,14 @@
+-- straight up, this is stolen from:
+-- https://github.com/ThePrimeagen/init.lua/blob/master/lua/theprimeagen/lazy/colors.lua
+-- (latest commit that changed that file was ac393a2)
+function ResetBackground(theme)
+	theme = theme or "rose-pine"
+	vim.cmd.colorscheme(theme)
+
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NromalFloat", { bg = "none" })
+end
+
 return {
 	{
 		"rose-pine/neovim",
@@ -57,7 +68,7 @@ return {
 				},
 			})
 
-			vim.cmd.colorscheme "rose-pine"
+			ResetBackground()
 		end,
 	},
 	-- Neovim plugin to improve the default vim.ui interfaces
