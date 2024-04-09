@@ -1,4 +1,9 @@
-import = ["~/.config/alacritty/rose-pine.toml"]
+# import = ["~/.config/alacritty/rose-pine.toml"]
+import = ["~/.cache/wal/alacritty-colors.toml"]
+
+[shell]
+	program = "/bin/zsh"
+	args = ["-l"]
 
 [window]
 	padding = { x = 2, y = 0 }

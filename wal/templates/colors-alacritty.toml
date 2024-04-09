@@ -1,0 +1,53 @@
+[colors.primary]
+foreground = {foreground}
+background = {background}
+
+[colors.cursor]
+foreground = {color0}
+background = {color5}
+
+# Normal colors
+[colors.normal]
+black = {color0}
+red = {color8}
+green = {color11}
+yellow = {color10}
+blue = {color13}
+magenta = {color14}
+cyan = {color12}
+white = {color5}
+
+# Bright colors
+[colors.bright]
+black = {color3}
+red = {color8}
+green = {color11}
+yellow = {color10}
+blue = {color13}
+magenta = {color14}
+cyan = {color12}
+white = {color7}
+
+[[colors.indexed_colors]]
+index = 16
+color = {color9}
+
+[[colors.indexed_colors]]
+index = 17
+color = {color15}
+
+[[colors.indexed_colors]]
+index = 18
+color = {color1}
+
+[[colors.indexed_colors]]
+index = 19
+color = {color2}
+
+[[colors.indexed_colors]]
+index = 20
+color = {color4}
+
+[[colors.indexed_colors]]
+index = 21
+color = {color6}

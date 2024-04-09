@@ -1,5 +1,4 @@
-@define-color bg-color #171717;
-@define-color fg-color #ba1660;
+@import "/home/prin/.cache/wal/colors-waybar.css";
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -8,8 +7,8 @@
 }
 
 window#waybar {
-	background-color: @bg-color;
-	color: @fg-color;
+	background-color: @background;
+	color: @foreground;
 	border-bottom: 0px solid rgba(0, 0, 0, 0);
 }
 
@@ -18,7 +17,7 @@ window#waybar {
     padding: 0 5px;
 	padding-top: 3px;
     background-color: transparent;
-    color: @fg-color;
+    color: @foreground;
 }
 
 #workspaces button.empty {
@@ -35,7 +34,7 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-    background-color: @fg-color;
+    background-color: @foreground;
 }
 
 /* -------- REST -------- */
@@ -51,12 +50,12 @@ window#waybar {
 #tray {
 	padding: 0 10px;
 	padding-top: 3px;
-	color: @fg-color;
+	color: @foreground;
 }
 
 #battery {
-    background-color: @bg-color;
-    color: @fg-color;
+    background-color: @background;
+    color: @foreground;
 }
 
 #battery.charging, #battery.plugged {
