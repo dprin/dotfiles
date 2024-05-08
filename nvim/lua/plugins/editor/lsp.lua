@@ -24,9 +24,15 @@ return {
 
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+
+			"folke/neodev.nvim",
 		},
 
 		config = function()
+			require("neodev").setup({
+
+			})
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require('lspconfig')
 
@@ -35,12 +41,20 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"rust_analyzer",
+					"clangd",
 				},
 				handlers = {
 					function(server_name)
-						lspconfig[server_name].setup {
-							capabilities = capabilities,
-						}
+						if server_name == "clangd" then
+							lspconfig[server_name].setup {
+								capabilities = capabilities,
+								cmd = { "clangd", "--offset-encoding=utf-16" },
+							}
+						else
+							lspconfig[server_name].setup {
+								capabilities = capabilities,
+							}
+						end
 					end,
 				}
 			})

@@ -71,7 +71,6 @@ return {
 			ResetBackground()
 		end,
 	},
-	-- Neovim plugin to improve the default vim.ui interfaces
 	{
 		"stevearc/dressing.nvim",
 			event = "VeryLazy",
