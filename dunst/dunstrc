@@ -1,5 +1,5 @@
 [global]
-    font = Iosevka 11
+    font = MonoLisa 11
 
     format = "<small><b>%a: </b>%s</small>\n%b"
     icon_position = left
