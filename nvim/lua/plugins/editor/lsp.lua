@@ -1,6 +1,9 @@
 return {
 	{
-		'github/copilot.vim'
+		'zbirenbaum/copilot.lua',
+		event = "InsertEnter",
+		cmd = "Copilot",
+		opts = {}
 	},
 	{
 		'jbyuki/nabla.nvim',
@@ -29,9 +32,7 @@ return {
 		},
 
 		config = function()
-			require("neodev").setup({
-
-			})
+			require("neodev").setup({})
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require('lspconfig')

@@ -10,35 +10,36 @@ return {
 		wk.register({
 			["<leader>"] = {
 				name = "General commands",
+				g = {
+					name = "Git commands",
+					g = { "<cmd>Neogit<cr>", "Neogit" },
+					f = { "<cmd>Telescope git_files<cr>", "Git Files" },
+					G = { "<cmd>Telescope git_commits<cr>", "Git Commits" },
+					z = { "<cmd>Telescope git_stash<cr>", "Git Stash" },
+					Z = { "<cmd>Telescope git_stashes<cr>", "Git Stashes" },
+					x = { "<cmd>Telescope git_bcommits<cr>", "Git BCommits" },
+				},
+				l = {
+					name = "LSP Commands",
+					d = { vim.lsp.buf.definition, "Definitions" },
+					e = { "<cmd>Lspsaga show_cursor_diagnostics<cr>", "Diagnostics" },
+					E = { "<cmd>Lspsaga show_buf_diagnostics<cr>", "Diagnostics" },
+					i = { "<cmd>Telescope lsp_implementations<cr>", "Implementations" },
+					a = { vim.lsp.buf.code_action, "Code action" },
+					f = { vim.lsp.buf.format, "Format" },
+					h = { vim.lsp.buf.hover, "hover" },
+				},
+				f = {
+					name = "Files",
+					["/"] = { "<cmd>Telescope live_grep<cr>", "Search" },
+					b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+
+				},
 				[";"] = { "<cmd>Telescope commands<cr>", "Commands" },
-				["/"] = { "<cmd>Telescope live_grep<cr>", "Search" },
-				b = { "<cmd>Telescope buffers<cr>", "Buffers" },
 				h = { "<cmd>Telescope help_tags<cr>", "Help" },
-				s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-				S = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols" },
-				d = { "<cmd>Lspsaga peek_definition<cr>", "Definitions" },
-				D = { "<cmd>Telescope lsp_implementations<cr>", "Implementations" },
-				r = { "<cmd>Telescope lsp_references<cr>", "References" },
-				a = { "<cmd>Telescope lsp_code_actions<cr>", "Code Actions" },
-				g = { "<cmd>Telescope git_status<cr>", "Git Status" },
-				G = { "<cmd>Telescope git_commits<cr>", "Git Commits" },
-				f = { "<cmd>Telescope git_files<cr>", "Git Files" },
-				z = { "<cmd>Telescope git_stash<cr>", "Git Stash" },
-				Z = { "<cmd>Telescope git_stashes<cr>", "Git Stashes" },
-				x = { "<cmd>Telescope git_bcommits<cr>", "Git BCommits" },
+				t = { "<cmd>NvimTreeToggle<cr>", "Toggle nvim-tree" },
 			},
-			["f"] = {
-				name = "File",
-				f = { "<cmd>Telescope find_files<cr>", "Find File" },
-				r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
-				n = { "<cmd>enew<cr>", "New File" },
-			},
-			["g"] = {
-				name = "Go to...",
-				d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
-				D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
-			},
-			["t"] = { "<cmd>NvimTreeToggle<cr>", "Toggle nvim-tree" },
 		});
 	end
 }
+
