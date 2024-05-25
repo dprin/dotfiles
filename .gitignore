@@ -12,3 +12,4 @@
 !alacritty.toml
 !alacritty/**
 !wal/**
+!scripts/**
