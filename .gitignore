@@ -13,3 +13,5 @@
 !alacritty/**
 !wal/**
 !scripts/**
+!fish/**
+!.tmux.conf

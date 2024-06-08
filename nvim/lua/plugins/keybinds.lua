@@ -27,7 +27,8 @@ return {
 					i = { "<cmd>Telescope lsp_implementations<cr>", "Implementations" },
 					a = { vim.lsp.buf.code_action, "Code action" },
 					f = { vim.lsp.buf.format, "Format" },
-					h = { vim.lsp.buf.hover, "hover" },
+					h = { vim.lsp.buf.hover, "Hover" },
+					r = { vim.lsp.buf.rename, "Rename" },
 				},
 				f = {
 					name = "Files",

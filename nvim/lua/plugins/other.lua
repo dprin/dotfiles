@@ -11,21 +11,50 @@ return {
 	},
 	{
 		"karb94/neoscroll.nvim",
-		config = function ()
+		config = function()
 			require('neoscroll').setup {}
 		end
 	},
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
-			"nvim-lua/plenary.nvim",         -- required
-			"sindrets/diffview.nvim",        -- optional - Diff integration
+			"nvim-lua/plenary.nvim", -- required
+			"sindrets/diffview.nvim", -- optional - Diff integration
 
 			-- Only one of these is needed, not both.
 			"nvim-telescope/telescope.nvim", -- optional
-			"ibhagwan/fzf-lua",              -- optional
+			"ibhagwan/fzf-lua",     -- optional
 		},
 		config = true
-	}
+	},
+	{
+		'lewis6991/gitsigns.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+		},
 
+		event = 'BufRead',
+		cmd = "Gitsigns",
+		opts = {}
+	},
+	-- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+			-- add any options here
+		},
+		config = function()
+			require('Comment').setup()
+		end,
+		lazy = false,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		}
+	}
 }

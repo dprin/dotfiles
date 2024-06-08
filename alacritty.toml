@@ -3,7 +3,7 @@ import = ["~/.cache/wal/alacritty-colors.toml"]
 
 [shell]
 program = "/bin/zsh"
-args = ["-l", "-c", "tmux new-session -A -s general"]
+args = ["-l", "-c", "wal -R && tmux new-session -A -s general"]
 
 [window]
 padding = { x = 2, y = 0 }
