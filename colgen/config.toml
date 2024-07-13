@@ -1,0 +1,24 @@
+[colorschemes.default]
+fg = "#f5d0ec"
+bg = "#050408"
+
+c0 = "#050408"
+c1 = "#a44e9b"
+c2 = "#c463b4"
+c3 = "#dc6db3"
+c4 = "#f283bd"
+c5 = "#fa90cb"
+c6 = "#f9a1dc"
+c7 = "#f5d0ec"
+c8 = "#ab91a5"
+c9 = "#a44e9b"
+c10 = "#c463b4"
+c11 = "#dc6db3"
+c12 = "#f283bd"
+c13 = "#fa90cb"
+c14 = "#f9a1dc"
+c15 = "#f5d0ec"
+
+[templates."alacritty-theme.toml"]
+output = "/home/prin/.config/alacritty/"
+name = "colors.toml"
