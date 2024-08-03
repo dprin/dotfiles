@@ -22,8 +22,7 @@ return {
 				l = {
 					name = "LSP Commands",
 					d = { vim.lsp.buf.definition, "Definitions" },
-					e = { "<cmd>Lspsaga show_cursor_diagnostics<cr>", "Diagnostics" },
-					E = { "<cmd>Lspsaga show_buf_diagnostics<cr>", "Diagnostics" },
+					e = { vim.diagnostic.goto_next, "Diagnostics" },
 					i = { "<cmd>Telescope lsp_implementations<cr>", "Implementations" },
 					a = { vim.lsp.buf.code_action, "Code action" },
 					f = { vim.lsp.buf.format, "Format" },
@@ -34,11 +33,17 @@ return {
 					name = "Files",
 					["/"] = { "<cmd>Telescope live_grep<cr>", "Search" },
 					b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+					f = { "<cmd>Telescope find_files<cr>", "Find file"}
 
 				},
 				[";"] = { "<cmd>Telescope commands<cr>", "Commands" },
 				h = { "<cmd>Telescope help_tags<cr>", "Help" },
 				t = { "<cmd>NvimTreeToggle<cr>", "Toggle nvim-tree" },
+				o = {
+					name = "Neorg Binds",
+					c = { "<Plug>(neorg.qol.todo-items.todo.task-cycle)", "Cycle todo item" },
+					g = { "<Plug>(neorg.esupports.hop.hop-link)", "Goto link"}
+				}
 			},
 		});
 	end

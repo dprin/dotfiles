@@ -1,10 +1,8 @@
-# import = ["~/.config/alacritty/rose-pine.toml"]
-# import = ["~/.cache/wal/alacritty-colors.toml"]
-import = ["./colors.toml"]
+import = ["~/.config/alacritty/colors.toml"]
 
 [shell]
-program = "/bin/zsh"
-args = ["-l", "-c", "wal -R && tmux new-session -A -s general"]
+program = "/bin/fish"
+args = ["-l", "-c", "tmux new-session -A -s general"]
 
 [window]
 padding = { x = 2, y = 0 }

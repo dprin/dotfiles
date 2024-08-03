@@ -56,5 +56,25 @@ return {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		}
+	},
+	-- Lua
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		}
+	},
+	{
+		event = "BufRead",
+		'jinh0/eyeliner.nvim',
+	},
+	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		config = true
+		-- use opts = {} for passing setup options
+		-- this is equalent to setup({}) function
 	}
 }
