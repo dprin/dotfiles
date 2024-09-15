@@ -11,7 +11,7 @@ return {
 		},
 
 		opts = {
-			highlight = { enable = true },
+			highlight = { enable = false },
 			indent = { enable = true },
 			context_commentstring = { enable = true, enable_autocmd = false },
 			ensure_installed = {
