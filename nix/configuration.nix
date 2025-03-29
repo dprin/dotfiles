@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, home-manager, ... }:
 {
   imports =
     [
@@ -13,12 +13,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "prin"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  programs.fish.enable = true;
   programs.hyprland.enable = true;
-  programs.direnv.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -71,27 +69,13 @@
     #media-session.enable = true;
   };
 
+  programs.fish.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.prin = {
     isNormalUser = true;
     description = "prin";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      alacritty
-      thunderbird
-      waybar
-      rofi
-      blueman
-      pavucontrol
-
-      starship
-      zoxide
-
-      polkit
-      # fonts
-      font-awesome
-      mononoki
-    ];
     shell = pkgs.fish;
   };
 
@@ -146,6 +130,7 @@
   ];
 
   system.stateVersion = "24.11"; # Did you read the comment?
+  home-manager.users.prin.home.stateVersion = "24.11";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

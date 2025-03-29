@@ -17,6 +17,9 @@
     pkgs.planify
     pkgs.evince
 
+    pkgs.thunderbird
+    pkgs.blueman
+
     pkgs.udiskie
   ];
 }

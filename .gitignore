@@ -5,7 +5,6 @@
 !nix/**
 !hypr/**
 !alacritty/**
-!fish/**
 !helix/**
 !dunst/**
 !waybar/**
