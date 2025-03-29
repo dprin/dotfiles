@@ -1,0 +1,13 @@
+*
+
+!.gitignore
+!*/
+!nix/**
+!hypr/**
+!alacritty/**
+!fish/**
+!helix/**
+!dunst/**
+!waybar/**
+!xremap/**
+!rofi/**

@@ -1,0 +1,104 @@
+@import "./colors.css";
+
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Iosevka Nerd Font, FontAwesome;
+    font-size: 13px;
+}
+
+window#waybar {
+	background-color: @background;
+	color: @foreground;
+	border-bottom: 0px solid rgba(0, 0, 0, 0);
+}
+
+/* -------- WORKSPACES -------- */
+#workspaces button {
+    padding: 0 5px;
+    padding-top: 3px;
+    background-color: transparent;
+    color: @foreground;
+}
+
+#workspaces button.empty {
+	color: #595959;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0px;
+}
+
+#workspaces button.urgent {
+    background-color: @foreground;
+}
+
+/* -------- REST -------- */
+#clock,
+#battery,
+#cpu,
+#window,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray {
+	padding: 0 10px;
+	padding-top: 3px;
+	color: @foreground;
+}
+
+#battery {
+    background-color: @background;
+    color: @foreground;
+}
+
+#battery.charging, #battery.plugged {
+    background-color: #26A65B;
+    color: #ffffff;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    padding-left: 10px;
+    padding-right: 13px;
+}
+
+#tray {
+    padding-left: 0;
+}
+
+#window {
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: @color1;
+    color: @foreground;
+    border-radius: 0 0 7px 7px;
+}
+
+window#waybar.empty #window {
+    background-color: @background;
+}
+
+#tray > .needs-attention {
+    background-color: rgba(255, 0, 0, 0.1);
+}

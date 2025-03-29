@@ -1,0 +1,16 @@
+
+[terminal.shell]
+program = "/usr/bin/env"
+args = ["fish", "-l", "-c", "tmux new-session -A -s general"]
+
+[window]
+padding = { x = 2, y = 0 }
+dynamic_padding = true
+
+[font]
+size=12
+
+[general]
+import = ["~/.config/alacritty/rose-pine.toml"]
+
+[terminal]

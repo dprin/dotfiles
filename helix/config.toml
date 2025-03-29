@@ -1,0 +1,8 @@
+theme = "base16_terminal"
+
+[editor]
+line-number = "relative"
+soft-wrap.enable = true
+
+[editor.cursor-shape]
+insert = "bar"

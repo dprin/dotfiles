@@ -1,0 +1,53 @@
+[colors.primary]
+foreground = '#f5d0ec'
+background = '#050408'
+
+[colors.cursor]
+foreground = '#050408'
+background = '#f283bd'
+
+# Normal colors
+[colors.normal]
+black = '#050408'
+red = '#f5d0ec'
+green = '#c463b4'
+yellow = '#a44e9b'
+blue = '#f283bd'
+magenta = '#fa90cb'
+cyan = '#dc6db3'
+white = '#f283bd'
+
+# Bright colors
+[colors.bright]
+black = '#c463b4'
+red = '#f5d0ec'
+green = '#c463b4'
+yellow = '#a44e9b'
+blue = '#f283bd'
+magenta = '#fa90cb'
+cyan = '#dc6db3'
+white = '#f9a1dc'
+
+[[colors.indexed_colors]]
+index = 16
+color = '#ab91a5'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#f9a1dc'
+
+[[colors.indexed_colors]]
+index = 18
+color = '#050408'
+
+[[colors.indexed_colors]]
+index = 19
+color = '#a44e9b'
+
+[[colors.indexed_colors]]
+index = 20
+color = '#dc6db3'
+
+[[colors.indexed_colors]]
+index = 21
+color = '#fa90cb'
