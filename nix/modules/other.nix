@@ -5,7 +5,7 @@
 {
   programs.steam.enable = true;
   
-  environment.systemPackages = [
+  users.users.prin.packages = [
     pkgs.nil
     pkgs.nixd
 
@@ -17,9 +17,20 @@
     pkgs.planify
     pkgs.evince
 
+    pkgs.piper
+    pkgs.libratbag
+
     pkgs.thunderbird
-    pkgs.blueman
+
+    pkgs.bluez
 
     pkgs.udiskie
+
+    pkgs.libreoffice-qt6
+    pkgs.qalculate-qt
+
+    pkgs.ani-cli
+    pkgs.mpv
+    pkgs.qbittorrent
   ];
 }

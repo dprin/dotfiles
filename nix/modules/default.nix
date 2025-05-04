@@ -1,14 +1,11 @@
 {
-  lib,
-  config,
-  home-manager,
   ...
 }:
 {
   imports = [
+    ./hyprland.nix
     ./fish.nix
     ./fonts.nix
     ./other.nix
-    ./hyprland.nix
   ];
 }
