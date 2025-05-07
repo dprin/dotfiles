@@ -4,7 +4,7 @@
   ...
 }:
 {
-  xdg.portal = lib.mkForce {
+  xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
     extraPortals = [
