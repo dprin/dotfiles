@@ -1,5 +1,6 @@
 {
   pkgs,
+  yt-x,
   ...
 }:
 with pkgs; let
@@ -20,18 +21,33 @@ in
 
     package = pkgs.steam;
   };
+
+  environment.etc."xdg/mimeapps.list" = {
+    text = ''
+      [Default Applications]
+      application/pdf=zathura.desktop;
+    '';
+  };
   
   users.users.prin.packages = [
     pkgs.nil
     pkgs.nixd
+
+    pkgs.vulkan-loader  
+    pkgs.vulkan-tools
+    pkgs.wine64
+    pkgs.wineWowPackages.stagingFull
+    pkgs.winetricks
+    pkgs.lutris
+
+    pkgs.unzip
 
     pkgs.discord
     pkgs.alacritty
     pkgs.spotify
     pkgs.tmux
     pkgs.btop
-    pkgs.planify
-    pkgs.evince
+    pkgs.zathura
 
     pkgs.piper
     pkgs.libratbag
@@ -51,6 +67,11 @@ in
 
     pkgs.poppler_utils
 
+    pkgs.logmein-hamachi
+    pkgs.haguichi
+    pkgs.prismlauncher
+
     pkgs.fastfetch
+    yt-x.packages."${system}".default
   ];
 }

@@ -39,6 +39,11 @@ let
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/game" = {
+      device = "/dev/nvme1n1p2";
+      fsType = "ext4";
+  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/4f09ebe8-c706-49be-b28d-2992b3508e00"; }
     ];

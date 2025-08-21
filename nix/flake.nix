@@ -8,20 +8,20 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    walker.url = "github:abenz1267/walker";
+    yt-x = {
+      url = "github:Benexl/yt-x";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, walker, ... }: {
-    nix.settings = {
-      substituters = ["https://walker-git.cachix.org"];
-      trusted-public-keys = ["walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="];
-    };
-  
+  outputs = { nixpkgs, home-manager, yt-x, ... } @ inputs: {
     nixosConfigurations."prin" = nixpkgs.lib.nixosSystem {
       modules = [
-        { home-manager.users.prin.imports = [walker.homeManagerModules.default]; }
         ./configuration.nix
         ./modules
+        ({ ... }: {
+          _module.args.yt-x = yt-x;
+        })
         home-manager.nixosModules.default
       ];
     };

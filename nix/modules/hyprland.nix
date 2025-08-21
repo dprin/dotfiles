@@ -4,23 +4,44 @@
   ...
 }:
 {
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-    ];
+  services.gnome.at-spi2-core.enable = true;
+
+  home-manager.users.prin = {
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-hyprland
+      ];
+
+      config.common.default = [ "hyprland" ];
+    };
+  };
+  
+
+  systemd.user.services."wait-for-full-path" = {
+    description = "wait for systemd units to have full PATH";
+    wantedBy = [ "xdg-desktop-portal.service" ];
+    before = [ "xdg-desktop-portal.service" ];
+    path = with pkgs; [ systemd coreutils gnugrep ];
+    script = ''
+      ispresent () {
+        systemctl --user show-environment | grep -E '^PATH=.*/.nix-profile/bin'
+      }
+      while ! ispresent; do
+        sleep 0.1;
+      done
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      TimeoutStartSec = "60";
+    };
   };
 
   # Set session variables
-  environment = {
-    variables = {
-      # If cursor is not visible, try to set this to "on".
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "Hyprland";
-    };
+  environment.variables = {
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
   };
 
   environment.sessionVariables = lib.mkForce {
@@ -29,6 +50,10 @@
     XDG_DATA_DIRS = "/usr/local/share/:/usr/share/";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_DESKTOP_PORTAL= "xdg-desktop-portal-hyprland";
+
 
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
@@ -44,18 +69,20 @@
 
     # withUWSM = true;
     xwayland.enable = true;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 
   home-manager.users.prin = {
     home.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    programs.walker = {
+    gtk = {
       enable = true;
-      runAsService = true;
-
-      config = {
-        ui.fullscreen = true;
+      theme = {
+        name = "Nightfox";
+        package = pkgs.nightfox-gtk-theme;
+      };
+      iconTheme = {
+        name = "Nightfox";
+        package = pkgs.nightfox-gtk-theme;
       };
     };
   }; 
@@ -70,6 +97,7 @@
   };
 
   users.users.prin.packages = [
+    pkgs.nightfox-gtk-theme
     pkgs.swww
     pkgs.waybar
     pkgs.waypaper
@@ -79,12 +107,18 @@
     pkgs.hyprshot
 
     pkgs.polkit
-    pkgs.ranger
+    pkgs.yazi
     pkgs.nwg-displays
     pkgs.ueberzugpp
+    
 
     # screen sharing
     pkgs.kdePackages.xwaylandvideobridge
+    pkgs.pipewire
     pkgs.wireplumber
+
+    pkgs.findex
+
+    pkgs.vesktop
   ];
 }
