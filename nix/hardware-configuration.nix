@@ -40,7 +40,7 @@ let
     };
 
   fileSystems."/game" = {
-      device = "/dev/nvme1n1p2";
+      device = "/dev/disk/by-uuid/96710878-6909-43f9-9113-70775a4ab5fc";
       fsType = "ext4";
   };
 

@@ -41,6 +41,7 @@ in
     pkgs.lutris
 
     pkgs.unzip
+    pkgs.unar
 
     pkgs.discord
     pkgs.alacritty
@@ -65,7 +66,7 @@ in
     pkgs.mpv
     pkgs.qbittorrent
 
-    pkgs.poppler_utils
+    pkgs.poppler-utils
 
     pkgs.logmein-hamachi
     pkgs.haguichi
@@ -73,5 +74,16 @@ in
 
     pkgs.fastfetch
     yt-x.packages."${system}".default
+
+    pkgs.zed-editor
+
+    pkgs.gzdoom
   ];
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = [
+      pkgs.svelte-language-server
+    ];
+  };
 }

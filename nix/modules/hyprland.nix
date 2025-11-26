@@ -7,6 +7,20 @@
   services.gnome.at-spi2-core.enable = true;
 
   home-manager.users.prin = {
+    home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Nightfox";
+        package = pkgs.nightfox-gtk-theme;
+      };
+      iconTheme = {
+        name = "Nightfox";
+        package = pkgs.nightfox-gtk-theme;
+      };
+    };
+
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
@@ -16,25 +30,18 @@
 
       config.common.default = [ "hyprland" ];
     };
-  };
-  
 
-  systemd.user.services."wait-for-full-path" = {
-    description = "wait for systemd units to have full PATH";
-    wantedBy = [ "xdg-desktop-portal.service" ];
-    before = [ "xdg-desktop-portal.service" ];
-    path = with pkgs; [ systemd coreutils gnugrep ];
-    script = ''
-      ispresent () {
-        systemctl --user show-environment | grep -E '^PATH=.*/.nix-profile/bin'
-      }
-      while ! ispresent; do
-        sleep 0.1;
-      done
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      TimeoutStartSec = "60";
+    systemd.user.services."hyprportal" = {
+      Unit = {
+        Description = "run hyprland desktop portal";
+        Before = [ "xdg-desktop-portal.service" ];
+      };
+      Install = {
+        WantedBy = [ "xdg-desktop-portal.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.xdg-desktop-portal-hyprland}/libexec/xdg-desktop-portal-hyprland";
+      };
     };
   };
 
@@ -71,22 +78,6 @@
     xwayland.enable = true;
   };
 
-  home-manager.users.prin = {
-    home.sessionVariables.NIXOS_OZONE_WL = "1";
-
-    gtk = {
-      enable = true;
-      theme = {
-        name = "Nightfox";
-        package = pkgs.nightfox-gtk-theme;
-      };
-      iconTheme = {
-        name = "Nightfox";
-        package = pkgs.nightfox-gtk-theme;
-      };
-    };
-  }; 
-
   # bluetooth
   services.blueman.enable = true;
 
@@ -107,18 +98,16 @@
     pkgs.hyprshot
 
     pkgs.polkit
-    pkgs.yazi
+    (pkgs.yazi.override {
+      _7zz = pkgs._7zz-rar;
+    })
     pkgs.nwg-displays
     pkgs.ueberzugpp
-    
 
-    # screen sharing
-    pkgs.kdePackages.xwaylandvideobridge
     pkgs.pipewire
     pkgs.wireplumber
 
     pkgs.findex
-
     pkgs.vesktop
   ];
 }
