@@ -26,9 +26,31 @@
       xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk
       ];
 
-      config.common.default = [ "hyprland" ];
+      config.common.default = [ "hyprland" "gtk" ];
+    };
+
+    xdg.desktopEntries.yazi = {
+      name = "Yazi";
+      exec = "alacritty -e ${pkgs.yazi}/bin/yazi";
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "yazi.desktop";
+        "application/pdf"="zathura.desktop";
+        "x-scheme-handler/discord"="vesktop.desktop";
+        "x-scheme-handler/mailto"="userapp-Thunderbird-46CN52.desktop";
+        "message/rfc822"="userapp-Thunderbird-46CN52.desktop";
+        "x-scheme-handler/mid"="userapp-Thunderbird-46CN52.desktop";
+        "x-scheme-handler/webcal"="userapp-Thunderbird-6PPM52.desktop";
+        "text/calendar"="userapp-Thunderbird-6PPM52.desktop";
+        "application/x-extension-ics"="userapp-Thunderbird-6PPM52.desktop";
+        "x-scheme-handler/webcals"="userapp-Thunderbird-6PPM52.desktop";
+      };
     };
 
     systemd.user.services."hyprportal" = {

@@ -23,72 +23,75 @@ let
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  config = {
+    boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+    boot.initrd.kernelModules = [ ];
+    boot.kernelModules = [ "kvm-intel" ];
+    boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7af24e75-7710-49c6-8a68-319f6b92111d";
-      fsType = "ext4";
-    };
+    boot.extraModprobeConfig = ''
+      blacklist nouveau
+      options nouveau modeset=0
+    '';
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/27D2-B309";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+    boot.blacklistedKernelModules = [ "nouveau" ];
 
-  fileSystems."/game" = {
-      device = "/dev/disk/by-uuid/96710878-6909-43f9-9113-70775a4ab5fc";
-      fsType = "ext4";
-  };
+    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+    # (the default) this is the recommended approach. When using systemd-networkd it's
+    # still possible to use this option, but it's recommended to use it in conjunction
+    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+    networking.useDHCP = lib.mkDefault true;
+    # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+    # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/4f09ebe8-c706-49be-b28d-2992b3508e00"; }
-    ];
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
+    hardware.graphics.enable = true;
+    hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    
+    hardware.nvidia = {
+      modesetting.enable = true;
+      # powerManagement.finegrained = true;
+      open = false;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics.enable = true;
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    # powerManagement.finegrained = true;
-    open = false;
-
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
       };
 
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+      package = config.boot.kernelPackages.nvidiaPackages.production;
     };
 
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    environment.systemPackages = [
+      nvidia-offload
+      no-offload
+    ];
+
+    services.xserver.videoDrivers = [ "nvidia" ];
+
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/7af24e75-7710-49c6-8a68-319f6b92111d";
+        fsType = "ext4";
+      };
+
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/27D2-B309";
+        fsType = "vfat";
+        options = [ "fmask=0077" "dmask=0077" ];
+      };
+
+    fileSystems."/game" = {
+        device = "/dev/disk/by-uuid/96710878-6909-43f9-9113-70775a4ab5fc";
+        fsType = "ext4";
+    };
+
+    swapDevices =
+      [ { device = "/dev/disk/by-uuid/4f09ebe8-c706-49be-b28d-2992b3508e00"; }
+      ];
   };
-
-  boot.extraModprobeConfig = ''
-    blacklist nouveau
-    options nouveau modeset=0
-  '';
-
-  boot.blacklistedKernelModules = [ "nouveau" ];
-
-  environment.systemPackages = [
-    nvidia-offload
-    no-offload
-  ];
 }

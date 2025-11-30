@@ -8,21 +8,32 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    yt-x = {
-      url = "github:Benexl/yt-x";
+
+    nvf = {
+      url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, home-manager, yt-x, ... } @ inputs: {
+  outputs = {
+    nixpkgs,
+    home-manager,
+    nvf,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    formatter.${system} = pkgs.nixpkgs-fmt;
+
     nixosConfigurations."prin" = nixpkgs.lib.nixosSystem {
       modules = [
+        home-manager.nixosModules.default
+        nvf.nixosModules.default
+
+        ./options.nix
         ./configuration.nix
         ./modules
-        ({ ... }: {
-          _module.args.yt-x = yt-x;
-        })
-        home-manager.nixosModules.default
       ];
     };
   };

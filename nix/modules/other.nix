@@ -1,6 +1,5 @@
 {
   pkgs,
-  yt-x,
   ...
 }:
 with pkgs; let
@@ -73,7 +72,6 @@ in
     pkgs.prismlauncher
 
     pkgs.fastfetch
-    yt-x.packages."${system}".default
 
     pkgs.zed-editor
 
