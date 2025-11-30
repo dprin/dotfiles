@@ -1,11 +1,8 @@
-{
-  ...
-}:
-{
+{...}: {
   config = {
-    nvim = true;
+    editor = "nvim";
   };
-  
+
   imports = [
     ./hyprland.nix
     ./fish.nix

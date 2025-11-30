@@ -3,7 +3,9 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.nvim {
+  config = lib.mkIf (config.editor == "nvim") {
+    environment.variables.EDITOR = "nvim";
+
     programs.nvf = {
       enable = true;
       enableManpages = true;
