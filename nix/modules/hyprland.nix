@@ -2,8 +2,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   services.gnome.at-spi2-core.enable = true;
 
   home-manager.users.prin = {
@@ -29,37 +28,37 @@
         pkgs.xdg-desktop-portal-gtk
       ];
 
-      config.common.default = [ "hyprland" "gtk" ];
+      config.common.default = ["hyprland" "gtk"];
     };
 
     xdg.desktopEntries.yazi = {
       name = "Yazi";
-      exec = "alacritty -e ${pkgs.yazi}/bin/yazi";
+      exec = "ghostty -e ${pkgs.yazi}/bin/yazi";
     };
 
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
         "inode/directory" = "yazi.desktop";
-        "application/pdf"="zathura.desktop";
-        "x-scheme-handler/discord"="vesktop.desktop";
-        "x-scheme-handler/mailto"="userapp-Thunderbird-46CN52.desktop";
-        "message/rfc822"="userapp-Thunderbird-46CN52.desktop";
-        "x-scheme-handler/mid"="userapp-Thunderbird-46CN52.desktop";
-        "x-scheme-handler/webcal"="userapp-Thunderbird-6PPM52.desktop";
-        "text/calendar"="userapp-Thunderbird-6PPM52.desktop";
-        "application/x-extension-ics"="userapp-Thunderbird-6PPM52.desktop";
-        "x-scheme-handler/webcals"="userapp-Thunderbird-6PPM52.desktop";
+        "application/pdf" = "zathura.desktop";
+        "x-scheme-handler/discord" = "discord.desktop";
+        "x-scheme-handler/mailto" = "userapp-Thunderbird-46CN52.desktop";
+        "message/rfc822" = "userapp-Thunderbird-46CN52.desktop";
+        "x-scheme-handler/mid" = "userapp-Thunderbird-46CN52.desktop";
+        "x-scheme-handler/webcal" = "userapp-Thunderbird-6PPM52.desktop";
+        "text/calendar" = "userapp-Thunderbird-6PPM52.desktop";
+        "application/x-extension-ics" = "userapp-Thunderbird-6PPM52.desktop";
+        "x-scheme-handler/webcals" = "userapp-Thunderbird-6PPM52.desktop";
       };
     };
 
     systemd.user.services."hyprportal" = {
       Unit = {
         Description = "run hyprland desktop portal";
-        Before = [ "xdg-desktop-portal.service" ];
+        Before = ["xdg-desktop-portal.service"];
       };
       Install = {
-        WantedBy = [ "xdg-desktop-portal.service" ];
+        WantedBy = ["xdg-desktop-portal.service"];
       };
       Service = {
         ExecStart = "${pkgs.xdg-desktop-portal-hyprland}/libexec/xdg-desktop-portal-hyprland";
@@ -81,8 +80,7 @@
     XDG_STATE_HOME = "$HOME/.local/state";
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_TYPE = "wayland";
-    XDG_DESKTOP_PORTAL= "xdg-desktop-portal-hyprland";
-
+    XDG_DESKTOP_PORTAL = "xdg-desktop-portal-hyprland";
 
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
@@ -130,6 +128,5 @@
     pkgs.wireplumber
 
     pkgs.findex
-    pkgs.vesktop
   ];
 }

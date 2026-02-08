@@ -1,18 +1,12 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
-{
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+{pkgs, ...}: {
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   config = {
     nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
 
     boot.loader.systemd-boot.enable = true;
@@ -24,8 +18,21 @@
     networking.networkmanager.enable = true;
 
     # Enable bluetooth
-    hardware.bluetooth.enable = true;
-    hardware.bluetooth.powerOnBoot = true;
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      package = pkgs.bluez-experimental;
+
+      settings = {
+        General = {
+          Experimental = true;
+          AutoEnable = true;
+          Enable = "Source,Sink,Media,Socket";
+          ControllerMode = "bredr";
+          UserspaceHID = true;
+        };
+      };
+    };
 
     time.timeZone = "Europe/Amsterdam";
 
@@ -42,6 +49,9 @@
       LC_TELEPHONE = "nl_NL.UTF-8";
       LC_TIME = "nl_NL.UTF-8";
     };
+
+    services.joycond.enable = true;
+    services.udev.packages = [pkgs.game-devices-udev-rules];
 
     services.displayManager.gdm.enable = true;
 
@@ -65,12 +75,14 @@
       pulse.enable = true;
     };
 
+    programs.appimage.enable = true;
+
     programs.fish.enable = true;
 
     users.users.prin = {
       isNormalUser = true;
       description = "prin";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = ["networkmanager" "wheel"];
       shell = pkgs.fish;
     };
 
@@ -80,12 +92,14 @@
     environment.systemPackages = with pkgs; [
       helix
       git
+      bluez-tools
+      SDL2
     ];
 
     system.stateVersion = "24.11"; # Did you read the comment?
     home-manager.users.prin.home.stateVersion = "24.11";
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
     nix.optimise.automatic = true;
     nix.gc = {
@@ -98,13 +112,13 @@
       user.services.polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
         serviceConfig = {
-            Type = "simple";
-            ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-            Restart = "on-failure";
-            RestartSec = 1;
-            TimeoutStopSec = 10;
-          };
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
       };
     };
- };
+  };
 }

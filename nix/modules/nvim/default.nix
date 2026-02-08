@@ -50,11 +50,29 @@
             formatOnSave = true;
           };
 
+          telescope.enable = true;
+
           languages = {
             enableFormat = true;
 
+            python = {
+              enable = true;
+              treesitter.enable = true;
+              lsp.enable = true;
+              format.enable = true;
+            };
+
             # actual languages
+            ts = {
+              treesitter.enable = true;
+              enable = true;
+              lsp.enable = true;
+              format.enable = true;
+            };
             svelte = {
+              treesitter.enable = true;
+              lsp.enable = true;
+              format.enable = true;
               enable = true;
             };
             nix = {
@@ -62,6 +80,11 @@
             };
             tailwind = {
               enable = true;
+            };
+            zig = {
+              enable = true;
+              treesitter.enable = true;
+              lsp.enable = true;
             };
           };
 
@@ -77,6 +100,10 @@
           dashboard = {
             dashboard-nvim.enable = false;
             alpha.enable = true;
+          };
+
+          git = {
+            neogit.enable = true;
           };
 
           visuals = {

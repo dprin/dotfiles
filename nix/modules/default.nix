@@ -10,5 +10,6 @@
     ./wireguard.nix
     ./nvim
     ./other.nix
+    ./gaming.nix
   ];
 }
