@@ -9,4 +9,5 @@
 !dunst/**
 !waybar/**
 !xremap/**
-!rofi/**
+!ghostty/**
+!findex/**
