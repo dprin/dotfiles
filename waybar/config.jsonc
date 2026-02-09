@@ -1,8 +1,8 @@
 {
     "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 25, // Waybar height (to be removed for auto height)
-    "spacing": 4, // Gaps between modules (4px)
+    "position": "top", // Waybar position
+    "height": 15, // Waybar height 
+    "spacing": 10, // Gaps between modules (4px)
     
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
@@ -12,7 +12,7 @@
     "hyprland/window": {
         "max-length": 64,
         "icon": true,
-        "icon-size": 16,  
+        "icon-size": 12  
     },
 
   	"hyprland/workspaces": {
@@ -22,7 +22,8 @@
   	},
 
     "tray": {
-        "spacing": 10
+        "spacing": 10,
+        "icon-size": 12
     },
 
     "clock": {

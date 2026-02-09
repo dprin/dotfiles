@@ -19,6 +19,11 @@ in {
     package = pkgs.steam;
   };
 
+  fonts.fontconfig = {
+    enable = true;
+    cache32Bit = true;
+  };
+
   users.users.prin.packages = [
     pkgs.vulkan-loader
     pkgs.vulkan-tools
@@ -28,5 +33,6 @@ in {
     pkgs.lutris
     pkgs.prismlauncher
     pkgs.gzdoom
+    pkgs.limo
   ];
 }
