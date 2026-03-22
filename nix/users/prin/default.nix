@@ -4,4 +4,8 @@
     editor = "nvim";
     username = "prin";
   };
+
+  imports = [
+    ./hardware-configuration.nix
+  ];
 }

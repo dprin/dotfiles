@@ -11,6 +11,7 @@
   };
 
   services.tailscale.enable = true;
+  programs.firefox.enable = true;
 
   users.users.${config.username}.packages = [
     pkgs.nil

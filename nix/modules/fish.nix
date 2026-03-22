@@ -1,4 +1,6 @@
 {config, ...}: {
+  programs.fish.enable = true;
+
   home-manager.users.${config.username} = {
     programs.zoxide.enable = true;
     programs.starship.enable = true;

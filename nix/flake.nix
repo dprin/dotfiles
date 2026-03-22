@@ -31,7 +31,7 @@
         nvf.nixosModules.default
 
         ./options.nix
-        ./users/prin.nix
+        ./users/prin
         ./configuration.nix
         ./modules
       ];

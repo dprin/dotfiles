@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 with pkgs; let
@@ -13,31 +14,36 @@ with pkgs; let
     );
   GPUOffloadApp = pkg: desktopName: patchDesktop pkg desktopName "^Exec=" "Exec=nvidia-offload ";
 in {
-  nixpkgs.config.packageOvverides = pkgs: {
-    steam = GPUOffloadApp steam "steam";
+  config = lib.mkIf (config.gaming) {
+    nixpkgs.config.packageOvverides = pkgs: {
+      steam = GPUOffloadApp steam "steam";
+    };
+
+    programs.steam = {
+      enable = true;
+
+      package = pkgs.steam;
+    };
+
+    fonts.fontconfig = {
+      enable = true;
+      cache32Bit = true;
+    };
+
+    services.joycond.enable = true;
+    services.udev.packages = [pkgs.game-devices-udev-rules];
+
+    users.users.${config.username}.packages = [
+      pkgs.vulkan-loader
+      pkgs.vulkan-tools
+      pkgs.wine64
+      pkgs.wineWow64Packages.stagingFull
+      pkgs.winetricks
+      pkgs.lutris
+      pkgs.prismlauncher
+      pkgs.gzdoom
+      pkgs.limo
+      pkgs.ckan
+    ];
   };
-
-  programs.steam = {
-    enable = true;
-
-    package = pkgs.steam;
-  };
-
-  fonts.fontconfig = {
-    enable = true;
-    cache32Bit = true;
-  };
-
-  users.users.${config.username}.packages = [
-    pkgs.vulkan-loader
-    pkgs.vulkan-tools
-    pkgs.wine64
-    pkgs.wineWow64Packages.stagingFull
-    pkgs.winetricks
-    pkgs.lutris
-    pkgs.prismlauncher
-    pkgs.gzdoom
-    pkgs.limo
-    pkgs.ckan
-  ];
 }

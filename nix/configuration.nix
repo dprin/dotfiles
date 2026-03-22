@@ -3,18 +3,15 @@
   config,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   config = {
-    nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
+    nixpkgs.config.allowUnfree = true;
+    system.stateVersion = "24.11";
+    home-manager.users.${config.username}.home.stateVersion = "24.11";
 
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
     # Enable networking
     networking.networkmanager.enable = true;
@@ -52,60 +49,60 @@
       LC_TIME = "nl_NL.UTF-8";
     };
 
-    services.joycond.enable = true;
-    services.udev.packages = [pkgs.game-devices-udev-rules];
+    services = {
+      displayManager.gdm.enable = true;
 
-    services.displayManager.gdm.enable = true;
+      # Configure keymap in X11
+      xserver.xkb = {
+        layout = "us";
+        variant = "";
+      };
 
-    # Configure keymap in X11
-    services.xserver.xkb = {
-      layout = "us";
-      variant = "";
+      # Enable CUPS to print documents.
+      printing.enable = true;
+      pulseaudio.enable = false;
+
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
     };
-
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
 
     # Enable sound with pipewire.
-    services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     security.polkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
 
     programs.appimage.enable = true;
-
-    programs.fish.enable = true;
 
     users.users.${config.username} = {
       isNormalUser = true;
       description = config.username;
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       shell = pkgs.fish;
     };
-
-    programs.firefox.enable = true;
-    nixpkgs.config.allowUnfree = true;
 
     environment.systemPackages = with pkgs; [
       SDL2
       git
     ];
 
-    system.stateVersion = "24.11";
-    home-manager.users.${config.username}.home.stateVersion = "24.11";
+    nix = {
+      settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
-    nix.settings.experimental-features = ["nix-command" "flakes"];
-
-    nix.optimise.automatic = true;
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+      optimise.automatic = true;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
     };
 
     systemd = {
