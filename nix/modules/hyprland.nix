@@ -13,7 +13,7 @@
   home-manager.users.${config.username} = {
     home.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    gtk = {
+    gtk.gtk4 = {
       enable = true;
       theme = {
         name = "Nightfox";
