@@ -36,5 +36,17 @@
         ./modules
       ];
     };
+
+    nixosConfigurations."yousefe" = nixpkgs.lib.nixosSystem {
+      modules = [
+        home-manager.nixosModules.default
+        nvf.nixosModules.default
+
+        ./options.nix
+        ./users/yousefe
+        ./configuration.nix
+        ./modules
+      ];
+    };
   };
 }
