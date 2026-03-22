@@ -1,5 +1,5 @@
-{...}: {
-  home-manager.users.prin = {
+{config, ...}: {
+  home-manager.users.${config.username} = {
     programs.zoxide.enable = true;
     programs.starship.enable = true;
 
@@ -22,7 +22,7 @@
         gp = "git push";
         gP = "git pull";
         gs = "git status";
-        nr = "sudo nixos-rebuild switch --flake ~/.config/nix/#prin";
+        nr = "sudo nixos-rebuild switch --flake ~/.config/nix/#${config.username}";
       };
     };
   };

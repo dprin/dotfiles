@@ -1,0 +1,3 @@
+[submodule "yazi/plugins/compress.yazi"]
+	path = yazi/plugins/compress.yazi
+	url = git@github.com:KKV9/compress.yazi.git

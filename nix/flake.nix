@@ -25,13 +25,13 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     formatter.${system} = pkgs.nixpkgs-fmt;
-
     nixosConfigurations."prin" = nixpkgs.lib.nixosSystem {
       modules = [
         home-manager.nixosModules.default
         nvf.nixosModules.default
 
         ./options.nix
+        ./users/prin.nix
         ./configuration.nix
         ./modules
       ];

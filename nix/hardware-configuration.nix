@@ -33,7 +33,7 @@ in {
 
     boot.kernelParams = ["hid.playstation.enable=1"];
 
-    boot.kernelModules = ["kvm-intel" "joydev" "uhid" "hidraw" "hid_generic"];
+    boot.kernelModules = ["kvm-intel" "joydev" "uhid" "hidraw" "hid_generic" "hid-playstation"];
     boot.extraModulePackages = [];
 
     boot.extraModprobeConfig = ''
@@ -54,6 +54,8 @@ in {
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+    hardware.bluetooth.enable = true;
+    hardware.bluetooth.powerOnBoot = true;
     hardware.graphics.enable = true;
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 

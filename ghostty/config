@@ -1,3 +1,4 @@
 theme = Ayu
 confirm-close-surface = false
 cursor-style = bar
+font-size = 10

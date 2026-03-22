@@ -1,8 +1,4 @@
 {...}: {
-  config = {
-    editor = "nvim";
-  };
-
   imports = [
     ./hyprland.nix
     ./fish.nix

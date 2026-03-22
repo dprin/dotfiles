@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   environment.etc."xdg/mimeapps.list" = {
     text = ''
       [Default Applications]
@@ -6,14 +10,19 @@
     '';
   };
 
-  users.users.prin.packages = [
+  services.tailscale.enable = true;
+
+  users.users.${config.username}.packages = [
     pkgs.nil
     pkgs.nixd
 
     pkgs.unzip
     pkgs.unar
 
+    pkgs.fluffychat
     pkgs.discord
+    pkgs.signal-desktop
+
     pkgs.alacritty
     pkgs.ghostty
     pkgs.spotify

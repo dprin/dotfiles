@@ -1,11 +1,12 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   services.gnome.at-spi2-core.enable = true;
 
-  home-manager.users.prin = {
+  home-manager.users.${config.username} = {
     home.sessionVariables.NIXOS_OZONE_WL = "1";
 
     gtk = {
@@ -107,7 +108,7 @@
     };
   };
 
-  users.users.prin.packages = [
+  users.users.${config.username}.packages = [
     pkgs.nightfox-gtk-theme
     pkgs.swww
     pkgs.waybar

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -11,8 +15,6 @@
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-
-    networking.hostName = "prin";
 
     # Enable networking
     networking.networkmanager.enable = true;
@@ -79,9 +81,9 @@
 
     programs.fish.enable = true;
 
-    users.users.prin = {
+    users.users.${config.username} = {
       isNormalUser = true;
-      description = "prin";
+      description = config.username;
       extraGroups = ["networkmanager" "wheel"];
       shell = pkgs.fish;
     };
@@ -90,14 +92,12 @@
     nixpkgs.config.allowUnfree = true;
 
     environment.systemPackages = with pkgs; [
-      helix
-      git
-      bluez-tools
       SDL2
+      git
     ];
 
-    system.stateVersion = "24.11"; # Did you read the comment?
-    home-manager.users.prin.home.stateVersion = "24.11";
+    system.stateVersion = "24.11";
+    home-manager.users.${config.username}.home.stateVersion = "24.11";
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 

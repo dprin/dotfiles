@@ -1,4 +1,8 @@
-{pkgs, ...}:
+{
+  pkgs,
+  config,
+  ...
+}:
 with pkgs; let
   patchDesktop = pkg: appName: from: to:
     lib.hiPrio (
@@ -24,15 +28,16 @@ in {
     cache32Bit = true;
   };
 
-  users.users.prin.packages = [
+  users.users.${config.username}.packages = [
     pkgs.vulkan-loader
     pkgs.vulkan-tools
     pkgs.wine64
-    pkgs.wineWowPackages.stagingFull
+    pkgs.wineWow64Packages.stagingFull
     pkgs.winetricks
     pkgs.lutris
     pkgs.prismlauncher
     pkgs.gzdoom
     pkgs.limo
+    pkgs.ckan
   ];
 }
