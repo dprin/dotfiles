@@ -36,14 +36,20 @@ in {
     users.users.${config.username}.packages = [
       pkgs.vulkan-loader
       pkgs.vulkan-tools
-      pkgs.wine64
-      pkgs.wineWow64Packages.stagingFull
+      pkgs.wineWow64Packages.wayland
       pkgs.winetricks
+
       pkgs.lutris
+
       pkgs.prismlauncher
+
       pkgs.gzdoom
+
       pkgs.limo
+
       pkgs.ckan
+
+      pkgs.shadps4
     ];
   };
 }

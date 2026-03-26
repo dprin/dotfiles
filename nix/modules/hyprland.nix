@@ -45,8 +45,6 @@
       enable = true;
       defaultApplications = {
         "inode/directory" = "yazi.desktop";
-        "application/pdf" = "zathura.desktop";
-        "x-scheme-handler/discord" = "discord.desktop";
         "x-scheme-handler/mailto" = "userapp-Thunderbird-46CN52.desktop";
         "message/rfc822" = "userapp-Thunderbird-46CN52.desktop";
         "x-scheme-handler/mid" = "userapp-Thunderbird-46CN52.desktop";

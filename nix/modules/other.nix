@@ -3,14 +3,11 @@
   config,
   ...
 }: {
-  environment.etc."xdg/mimeapps.list" = {
-    text = ''
-      [Default Applications]
-      application/pdf=zathura.desktop;
-    '';
+  xdg.mime.defaultApplications = {
+    "application/pdf" = "zathura.desktop";
+    "x-scheme-handler/discord" = "discord.desktop";
   };
 
-  services.tailscale.enable = true;
   programs.firefox.enable = true;
 
   users.users.${config.username}.packages = [
@@ -20,11 +17,9 @@
     pkgs.unzip
     pkgs.unar
 
-    pkgs.fluffychat
     pkgs.discord
     pkgs.signal-desktop
 
-    pkgs.alacritty
     pkgs.ghostty
     pkgs.spotify
     pkgs.tmux
@@ -49,18 +44,6 @@
 
     pkgs.poppler-utils
 
-    pkgs.logmein-hamachi
-    pkgs.haguichi
-
     pkgs.fastfetch
-
-    pkgs.shadps4
   ];
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = [
-      pkgs.svelte-language-server
-    ];
-  };
 }
