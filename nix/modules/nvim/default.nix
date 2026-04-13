@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   config = lib.mkIf (config.editor == "nvim") {
@@ -13,6 +14,14 @@
       settings = {
         vim = {
           autocomplete.blink-cmp = import ./blink-cmp.nix;
+
+          treesitter = {
+            enable = true;
+            indent.enable = true;
+            highlight.enable = true;
+
+            grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+          };
 
           theme = {
             enable = true;
@@ -72,7 +81,7 @@
             svelte = {
               treesitter.enable = true;
               lsp.enable = true;
-              format.enable = true;
+              format.enable = false;
               enable = true;
             };
             nix = {
@@ -89,6 +98,11 @@
             zig = {
               enable = true;
               treesitter.enable = true;
+              lsp.enable = true;
+            };
+            html = {
+              enable = true;
+              format.enable = true;
               lsp.enable = true;
             };
           };
