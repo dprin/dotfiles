@@ -112,7 +112,7 @@
 
   users.users.${config.username}.packages = [
     pkgs.nightfox-gtk-theme
-    pkgs.swww
+    pkgs.awww
     pkgs.waybar
     pkgs.waypaper
     pkgs.dunst

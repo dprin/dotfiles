@@ -13,40 +13,43 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     home-manager,
     nvf,
+    agenix,
     ...
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    defaultModules = [
+      home-manager.nixosModules.default
+      nvf.nixosModules.default
+
+      ./options.nix
+      ./users/prin
+      ./configuration.nix
+      ./modules
+    ];
   in {
     formatter.${system} = pkgs.nixpkgs-fmt;
     nixosConfigurations."prin" = nixpkgs.lib.nixosSystem {
-      modules = [
-        home-manager.nixosModules.default
-        nvf.nixosModules.default
-
-        ./options.nix
-        ./users/prin
-        ./configuration.nix
-        ./modules
-      ];
+      modules =
+        defaultModules
+        ++ [
+          agenix.nixosModules.default
+        ];
     };
 
     nixosConfigurations."yousefe" = nixpkgs.lib.nixosSystem {
-      modules = [
-        home-manager.nixosModules.default
-        nvf.nixosModules.default
-
-        ./options.nix
-        ./users/yousefe
-        ./configuration.nix
-        ./modules
-      ];
+      modules = defaultModules;
     };
   };
 }
