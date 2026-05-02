@@ -45,5 +45,7 @@
     pkgs.poppler-utils
 
     pkgs.fastfetch
+
+    pkgs.nh
   ];
 }
