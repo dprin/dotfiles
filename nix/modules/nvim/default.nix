@@ -57,6 +57,8 @@
           lsp = {
             enable = true;
             formatOnSave = true;
+
+            presets.tailwindcss-language-server.enable = true;
           };
 
           telescope.enable = true;
@@ -91,9 +93,6 @@
                 servers = ["nixd"];
               };
               treesitter.enable = true;
-            };
-            tailwind-language-server = {
-              enable = true;
             };
             zig = {
               enable = true;
