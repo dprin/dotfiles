@@ -39,7 +39,7 @@ in {
       pkgs.wineWow64Packages.wayland
       pkgs.winetricks
 
-      pkgs.lutris
+      # pkgs.lutris
 
       pkgs.prismlauncher
 

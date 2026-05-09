@@ -11,6 +11,7 @@ in {
         pkgs.teams-for-linux
         pkgs.jetbrains.rider
         pkgs.nautilus
+        pkgs.yubioath-flutter
       ];
 
       extraGroups = [
@@ -18,9 +19,9 @@ in {
       ];
     };
 
-    virtualisation.docker = {
-      enable = true;
-    };
+    services.pcscd.enable = true;
+
+    virtualisation.docker.enable = true;
 
     programs.virt-manager.enable = true;
 

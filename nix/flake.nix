@@ -34,7 +34,6 @@
       nvf.nixosModules.default
 
       ./options.nix
-      ./users/prin
       ./configuration.nix
       ./modules
     ];
@@ -45,11 +44,16 @@
         defaultModules
         ++ [
           agenix.nixosModules.default
+          ./users/prin
         ];
     };
 
     nixosConfigurations."yousefe" = nixpkgs.lib.nixosSystem {
-      modules = defaultModules;
+      modules =
+        defaultModules
+        ++ [
+          ./users/yousefe
+        ];
     };
   };
 }
