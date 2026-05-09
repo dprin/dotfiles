@@ -72,7 +72,7 @@
             };
 
             # actual languages
-            ts = {
+            typescript = {
               treesitter.enable = true;
               enable = true;
               lsp.enable = true;
@@ -92,7 +92,7 @@
               };
               treesitter.enable = true;
             };
-            tailwind = {
+            tailwind-language-server = {
               enable = true;
             };
             zig = {
