@@ -12,6 +12,7 @@ in {
         pkgs.jetbrains.rider
         pkgs.nautilus
         pkgs.yubioath-flutter
+        pkgs.google-chrome
       ];
 
       extraGroups = [
@@ -19,6 +20,12 @@ in {
       ];
     };
 
+    fonts.packages = [
+      pkgs.corefonts
+      pkgs.liberation_ttf
+      pkgs.carlito
+      pkgs.vista-fonts
+    ];
     services.pcscd.enable = true;
 
     virtualisation.docker.enable = true;
