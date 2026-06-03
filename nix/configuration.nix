@@ -50,7 +50,15 @@
     };
 
     services = {
-      displayManager.gdm.enable = true;
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.tuigreet}/bin/tuigreet --time -r --cmd start-hyprland";
+            user = "greeter";
+          };
+        };
+      };
 
       # Configure keymap in X11
       xserver.xkb = {
