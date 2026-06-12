@@ -16,5 +16,17 @@
       type = lib.types.str;
       description = "Username for the configuration";
     };
+
+    hyprland = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          monitors = lib.mkOption {
+            type = lib.types.str;
+            description = "String for monitor settings";
+            default = "";
+          };
+        };
+      };
+    };
   };
 }

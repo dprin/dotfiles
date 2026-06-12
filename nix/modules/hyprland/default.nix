@@ -3,7 +3,17 @@
   lib,
   config,
   ...
-}: {
+}: let
+  hyprlandConfigDir = ./config;
+  configStr =
+    builtins.concatStringsSep "\n"
+    ((
+        map
+        (f: builtins.readFile "${hyprlandConfigDir}/${f}")
+        (builtins.attrNames (lib.readDir hyprlandConfigDir))
+      )
+      ++ [config.hyprland.monitors]);
+in {
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -12,6 +22,14 @@
 
   home-manager.users.${config.username} = {
     home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    wayland.windowManager.hyprland = {
+      enable = true;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+
+      configType = "hyprlang";
+      extraConfig = configStr;
+    };
 
     gtk.gtk4 = {
       enable = true;
@@ -30,10 +48,10 @@
       xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-hyprland
-        pkgs.kdePackages.xdg-desktop-portal-kde
+        pkgs.xdg-desktop-portal-gtk
       ];
 
-      config.common.default = ["hyprland" "kde"];
+      config.common.default = ["hyprland" "gtk"];
     };
 
     xdg.desktopEntries.yazi = {
@@ -93,13 +111,6 @@
   };
 
   programs.hyprlock.enable = true;
-
-  programs.hyprland = {
-    enable = true;
-
-    # withUWSM = true;
-    xwayland.enable = true;
-  };
 
   # bluetooth
   services.blueman.enable = true;

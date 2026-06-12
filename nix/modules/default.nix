@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./hyprland.nix
+    ./hyprland
     ./fish.nix
     ./fonts.nix
     ./wireguard.nix
