@@ -1,5 +1,6 @@
 {pkgs, ...}: let
   name = "yousefe";
+  archi = pkgs.callPackage ./archi.nix {};
 in {
   config = {
     gaming = false;
@@ -16,11 +17,28 @@ in {
 
     users.users.${name} = {
       packages = [
+        (pkgs.jetbrains.rider.overrideAttrs (old: {
+          nativeBuildInputs =
+            (old.nativeBuildInputs or [])
+            ++ [
+              pkgs.makeWrapper
+            ];
+
+          postInstall =
+            (old.postInstall or "")
+            + ''
+              wrapProgram $out/bin/rider \
+                --prefix LD_LIBRARY_PATH : ${pkgs.stdenv.cc.cc.lib}/lib
+            '';
+        }))
+
         pkgs.teams-for-linux
-        pkgs.jetbrains.rider
         pkgs.nautilus
         pkgs.yubioath-flutter
         pkgs.google-chrome
+        pkgs.claude-code
+        pkgs.osu-lazer
+        archi
       ];
 
       extraGroups = [

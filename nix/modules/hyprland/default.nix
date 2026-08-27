@@ -31,16 +31,18 @@ in {
       extraConfig = configStr;
     };
 
+    dconf.enable = true;
+
     gtk.gtk4 = {
       enable = true;
       theme = {
-        name = "Nightfox";
-        package = pkgs.nightfox-gtk-theme;
+        name = "Adwaita";
       };
       iconTheme = {
-        name = "Nightfox";
-        package = pkgs.nightfox-gtk-theme;
+        name = "Adwaita";
       };
+
+      colorScheme = "dark";
     };
 
     xdg.portal = {
@@ -127,7 +129,6 @@ in {
   };
 
   users.users.${config.username}.packages = [
-    pkgs.nightfox-gtk-theme
     pkgs.awww
     pkgs.waybar
     pkgs.waypaper
